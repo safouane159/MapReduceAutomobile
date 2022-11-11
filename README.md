@@ -119,7 +119,7 @@ resultat du deuxieme job mapReduce :
 
 
 
-##Explication des script utilisé
+## 2. Explication des script utilisé
 
 dans cette section nous allons décrir notre démarche effectué pour l’adaptation du fichier CO2.csv et son intégration dans la table catalogue.
 
@@ -132,20 +132,32 @@ comme vous avez consaté nous avons executer deux job Map/Reduce pour arriver au
 nous allons detailler chaqu'unz des deux dans ce chaptire
 
 
-### premiere job (Automobile-2.0)
+### 2.1. premiere job (Automobile-2.0)
 
 cette job est responsable de faire le netoiyage des valeurs du fichier C02.csv, remplir les données manquane,calculer le moyen general 
 
 
 Nettoyage
 
-// A22
+// ![Nettoyage](/A22.jpeg)
 
 - les numero de ligne sont supprimer 
 - les model sont supprimer car ils ne servent plus a rien puisque ils matche pas les models dans la table catalogue 
 - les marque repsentra le KEY pour notre MAP 
 - les BonusMalus, rejets CO2 et le cout repsentra le VALUE pour notre MAP
-- a ce stage es valeur manquant du colonne BonusMalus seront replacer par 0 mais just temporairement (
-      
-      
+- a ce stage es valeur manquant du colonne BonusMalus seront replacer par 0 mais just temporairement (on expliquera plus tard dans le rapport les changement effectuer)
+
+
+
+Example : Simulation job1 MapReduce
+ ![job1](/A23.jpeg)
+
+dans chaque ligne ( iteration ) 3 ligne sont écrits
+    -  ligne 1 pour qualquler la moyen des colonnes de chaque marque
+    -  ligne 2 pour qualquler le moyen general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2
+    -  ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA pour assurer qu'elle sera traiter au premier par le reducer 
+    - ligne 3 est notre soltion pour passer une valeur ( moyen bonusMalus) depuis le mapper vers le reducer
+    - les marque qui ont au moin une valeur BonusMalus n'auront pas la valeur moyen
+
+la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus  
       
