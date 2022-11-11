@@ -139,7 +139,7 @@ cette job est responsable de faire le netoiyage des valeurs du fichier C02.csv, 
 
 Nettoyage
 
-// ![Nettoyage](/A22.jpeg)
+// ![Nettoyage](/images/A22.jpeg)
 
 - les numero de ligne sont supprimer 
 - les model sont supprimer car ils ne servent plus a rien puisque ils matche pas les models dans la table catalogue 
@@ -150,7 +150,7 @@ Nettoyage
 
 
 Example : Simulation job1 MapReduce
- ![job1](/A23.jpeg)
+ ![job1](/images/A23.jpeg)
 
 dans chaque ligne ( iteration ) 3 ligne sont écrits
     -  ligne 1 pour qualquler la moyen des colonnes de chaque marque
