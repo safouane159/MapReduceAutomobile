@@ -137,7 +137,8 @@ Nettoyage
 
 
 
-Example : Simulation job1 MapReduce
+Example : Simulation job1 MapReduce <br />
+
  ![job1](/images/A23.jpeg)
 
 - dans chaque ligne ( iteration ) 3 ligne sont écrits : <br />
@@ -150,12 +151,13 @@ Example : Simulation job1 MapReduce
 - la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus. <br />
       
 resultat : <br />
+
  ![job1](/images/z22.png)
 
       
 ### 2.2. deuxieme job (Automobile-2.0)
 
-cette job est responsable de faire la jointure entre la table catalogue et la table CO2_Moyennes.
+cette job est responsable de faire la jointure entre la table catalogue et la table CO2_Moyennes.<br />
 
  ![job1](/images/b22.jpeg)
 
@@ -165,7 +167,8 @@ cette job est responsable de faire la jointure entre la table catalogue et la ta
 
 
 
-Example : Simulation job1 MapReduce
+Example : Simulation job1 MapReduce <br />
+
  ![job1](/images/b23.jpeg)
 
 - un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2. <br />
