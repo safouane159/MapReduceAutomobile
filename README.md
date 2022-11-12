@@ -22,11 +22,11 @@ Notes :<br />
 
 
 
-## 1. Prise en main ( script pour executer les jobs)
+## 1. Prise en main (script pour executer les jobs)
 
 ### 1.1. Se connecter au server a distance avec SSH :
 
-ouvrir un nouveau terminal1 :<br />
+Ouvrir un nouveau terminal1 :<br />
 
 ```shell
 $ ssh OUAZRI@134.59.152.114 -p 443
@@ -96,9 +96,9 @@ $  scp -P 443 <path-to-jar>/AutomobileMultupleInput-1.0-SNAPSHOT.jar OUAZRI@134.
  $ hadoop jar AutomobileMultupleInput-2.0.jar  org.mbds.AutomobileMultiple /CO2_OUAZRI/catalogue.csv  /result/part-r-00000 /myres
 ```
 
-Important : il faut changer le nom de fichier des resultat "/results" et "/myres" si les deux deja exist 
+Important : il faut changer le nom de fichier des resultat "/results" et "/myres" si les deux déja exist 
 
-### 1.6. Consulter les resultat
+### 1.6. Consulter les resultats
 
 ```shell
 $ hadoop fs -cat /result/*
@@ -107,33 +107,33 @@ $ hadoop fs -cat /myres/*
 
 
 
-## 2. Explication des script utilisé
+## 2. Explication des scripts utilisés
 
-Dans cette section nous allons décrir notre démarche effectué pour l’adaptation du fichier CO2.csv et son intégration dans la table catalogue.
+Dans cette section nous allons décrir nos démarche effectué pour l’adaptation du fichier CO2.csv et son intégration dans la table catalogue.
 
 
-Comme vous avez consaté nous avons executer deux job Map/Reduce pour arriver au resultat attendu.
+Comme vous avez consaté nous avons executé deux job Map/Reduce pour arriver au resultat attendu.
 
   - Automobile-2.0. (Data Munging).
   - AutomobileMultupleInput-2.0. (joining two data set).
 
-Nous allons detailler chaqu'unz des deux dans ce chaptire
+Nous allons detailler chaqu'une des deux dans ce chaptire
 
 
 ### 2.1. Premiere job (Automobile-2.0)
 
-Cette job est responsable de faire le netoiyage des valeurs du fichier C02.csv, remplir les données manquane,calculer le moyen general. <br /> 
+Cette job est responsable de faire le netoiyage des valeurs du fichier C02.csv, remplir les données manquane et calculer le moyen general. <br /> 
 
 
 Nettoyage: <br />
 
  ![Nettoyage](/images/A22.jpeg)
 
-- Les numero de ligne sont supprimer.
-- Les model sont supprimer car ils ne servent plus a rien puisque ils matche pas les models dans la table catalogue.
+- Les numeros de ligne sont supprimés.
+- Les models sont supprimés car ils ne servent plus à rien, puisque ils ne matche pas les models dans la table catalogue.
 - Les marque repsentra le KEY pour notre MAP.
 - Les BonusMalus, rejets CO2 et le cout repsentra le VALUE pour notre MAP.
-- A ce stage es valeur manquant du colonne BonusMalus seront replacer par 0 mais just temporairement (on expliquera plus tard dans le rapport les changement effectuer).<br />
+- A ce stage les valeurs manquant du colonne BonusMalus seront replacer par 0 mais just temporairement (nous éxpliquera plus tard dans le rapport les changement effectué).<br />
 
 
 
@@ -142,13 +142,13 @@ Example : Simulation job1 MapReduce <br />
  ![job1](/images/A23.jpeg)
 
 - Dans chaque ligne ( iteration ) 3 ligne sont écrits : <br />
-    -  Ligne 1 pour qualquler la moyen des colonnes de chaque marque. <br />
-    -  Ligne 2 pour qualquler le moyen general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2. <br />
-    -  Ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA pour assurer qu'elle sera traiter au premier par le reducer. <br />
-    - Ligne 3 est notre soltion pour passer une valeur ( moyen bonusMalus) depuis le mapper vers le reducer. <br />
-    - Les marque qui ont au moin une valeur BonusMalus n'auront pas la valeur moyen. <br />
+    -  Ligne 1 pour qualquler la moyennes des colonnes de chaque marque. <br />
+    -  Ligne 2 pour qualquler la moyennes general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2. <br />
+    -  Ligne 3 pour qualquler la moyennes des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key "AAAA" pour assurer qu'elle sera traiter au premier par le reducer. <br />
+    - Ligne 3 est notre soltion pour passer une valeur ( moyennes bonusMalus) depuis le mapper vers le reducer. <br />
+    - Les marques qui ont au moin une valeur BonusMalus n'auront pas la valeur moyennes. <br />
 
-- La valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus. <br />
+- La valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyennes de BonusMalus. <br />
       
 Resultat : <br />
 
@@ -163,7 +163,7 @@ Cette job est responsable de faire la jointure entre la table catalogue et la ta
 
 
 - Une jointure sera effectuer avec l'id marque.
-- Les marque qui n'existe pas dans  la table CO2_moyennnes auront le moyenne de toute la table (id = forall).<br />
+- Les marque qui n'existe pas dans la table CO2_moyennnes auront la moyenne de toute la table (id = forall).<br />
 
 
 
@@ -183,4 +183,13 @@ Note : pour la moyenne general de la table CO2 la clé est "AAAA" pour quelle se
 Resultat : <br />
 
  ![job1](/images/z23.jpeg)
+
+
+3. Scripts (Programmes)
+
+
+- Vous trouverz les scripts utilisé dans ce repositorie.
+- Le code est commenté est bien detaillé.
+
+
 
