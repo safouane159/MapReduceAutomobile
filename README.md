@@ -85,24 +85,24 @@ Aprés deplacer les jar dans Hadoop
 
 ```shell
 $  scp -P 443 <path-to-jar>/Automobile-2.0.0.jar  OUAZRI@134.59.152.114:~/
-$  scp -P 443 <path-to-jar>/AutomobileMultupleInput-1.0-SNAPSHOT.jar OUAZRI@134.59.152.114:~/
+$  scp -P 443 <path-to-jar>/AutomobileMultupleInput-2.0.0.jar OUAZRI@134.59.152.114:~/
 ```
 
 ### 1.5. Executer les jars
 
 
 ```shell
- $ hadoop jar Automobile-2.0.0.jar  org.example.Automobile /CO2_OUAZRI/CO2.csv /result
- $ hadoop jar AutomobileMultupleInput-2.0.jar  org.mbds.AutomobileMultiple /CO2_OUAZRI/catalogue.csv  /result/part-r-00000 /myres
+ $ hadoop jar Automobile-2.0.0.jar  org.example.Automobile /CO2_OUAZRI/CO2.csv /result8
+ $ hadoop jar AutomobileMultupleInput-2.0.0.jar  org.mbds.AutomobileMultiple /CO2_OUAZRI/catalogue.csv  /result8/part-r-00000 /myres12
 ```
 
-Important : il faut changer le nom de fichier des resultat "/results" et "/myres" si les deux déja exist 
+Important : il faut changer le nom de fichier des resultat "/results8" et "/myres" si les deux déja exist 
 
 ### 1.6. Consulter les resultats
 
 ```shell
-$ hadoop fs -cat /result/*
-$ hadoop fs -cat /myres/*
+$ hadoop fs -cat /result8/*
+$ hadoop fs -cat /myres12/*
 ```
 
 
