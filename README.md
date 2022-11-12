@@ -3,16 +3,16 @@
 
 
 # Sujet 
-Après avoir construit votre DATA LAKE le Concessionnaire vous appelle et vous fait part que certaines don- nées étaient perdues avant votre intervention – notamment les détails sur l’émission CO2 / le coût d’énergie / la valeur de Bonus/Malus pour la taxation par marque et modelé de voiture. Il est possible que ses données
-seraient utiles pour améliorer la qualité de vos modelés prédictives. En cherchant sur Internet vous avez trouvé un fichier CO2.csv. C’est une autre base des données qui a certaines informations qui peuvent vous aider mais elle n’est pas parfaite. Elle ne contient pas tous les marques et modelés des voitures qui sont dans le catalogue du Concessionnaire. De plus le format de stockage est différent (la marque et le modelé sont dans une même colonne), il y a des valeurs manquant (colonne Bonus/Malus) et des valeurs erronés (colonne Bonus/Malus par exemple contient ‘-6 000€ 1’ a la place de ‘-6 000€’).
+Après avoir construit votre DATA LAKE le Concessionnaire vous appelle et vous fait part que certaines don- nées étaient perdues avant votre intervention – notamment les détails sur l’émission CO2 / le coût d’énergie / la valeur de Bonus/Malus pour la taxation par marque et modelé de voiture. <br />
+Il est possible que ses données seraient utiles pour améliorer la qualité de vos modelés prédictives. En cherchant sur Internet vous avez trouvé un fichier CO2.csv. C’est une autre base des données qui a certaines informations qui peuvent vous aider mais elle n’est pas parfaite. Elle ne contient pas tous les marques et modelés des voitures qui sont dans le catalogue du Concessionnaire. De plus le format de stockage est différent (la marque et le modelé sont dans une même colonne), il y a des valeurs manquant (colonne Bonus/Malus) et des valeurs erronés (colonne Bonus/Malus par exemple contient ‘-6 000€ 1’ a la place de ‘-6 000€’). <br />
 Le but est d’écrire un programme map/reduce avec Hadoop ou Spark qui va permettre d’adapter le fichier- CO2.csv pour intégrer ses informations complémentaires dans la ou les tables catalogue du Concession- naire (ajouter des colonnes "Bonus / Malus", "Rejets CO2 g/km", "Cout Energie").
-Notes :
-• Les modelés des voitures du fichier CO2.csv n’ont pas beaucoup des valeurs en commun par rapport à la table catalogue – on voudrait utiliser une valeur moyenne d’émission CO2 (de même pour les autres co- lonnes : "Bonus / Malus", "Cout Energie") pour la marque de voiture concerne.
-• Pour les marques de voitures qui ne sont pas dans le fichier CO2.csv on voudrait insérer la moyenne d’émission CO2 (de même pour les autres colonnes) de tous les marques de véhicules qui sont présent des deux côtés.
-• Pour l’import / export des données vous pouvez utiliser des connecteurs Hadoop vu dans le cours 3 ou/et découvrir l’outil Hadoop Sqoop (http://sqoop.apache.org/) qui est projet Apache simplifiant cette tâche.
-• Le fichier CO2.csv se trouve avec les autres ressources disponibles.
+Notes :<br />
+• Les modelés des voitures du fichier CO2.csv n’ont pas beaucoup des valeurs en commun par rapport à la table catalogue – on voudrait utiliser une valeur moyenne d’émission CO2 (de même pour les autres co- lonnes : "Bonus / Malus", "Cout Energie") pour la marque de voiture concerne.<br />
+• Pour les marques de voitures qui ne sont pas dans le fichier CO2.csv on voudrait insérer la moyenne d’émission CO2 (de même pour les autres colonnes) de tous les marques de véhicules qui sont présent des deux côtés.<br />
+• Pour l’import / export des données vous pouvez utiliser des connecteurs Hadoop vu dans le cours 3 ou/et découvrir l’outil Hadoop Sqoop (http://sqoop.apache.org/) qui est projet Apache simplifiant cette tâche.<br />
+• Le fichier CO2.csv se trouve avec les autres ressources disponibles.<br />
 
-**Cette tache est réalisé par  **
+**Cette tache est réalisé par  **<br />
 
 | **Nom / mail**                               |  **Groupe**        |
 |----------------------------------------------|----------------------------|
@@ -27,7 +27,7 @@ Notes :
 
 ### 1.1 se connecter au server a distance avec SSH :
 
-ouvrir un nouveau terminal1 :
+ouvrir un nouveau terminal1 :<br />
 
 ```shell
 $ ssh OUAZRI@134.59.152.114 -p 443
@@ -42,7 +42,7 @@ ouvrir un autre terminal2 :
 ```shell
 $ scp -P 443 <path-to-your-file>/CO2.csv OUAZRI@134.59.152.114:~/
 
-$	scp -P 443 <path-to-your-file>/catalogue.csv OUAZRI@134.59.152.114:~/
+$ scp -P 443 <path-to-your-file>/catalogue.csv OUAZRI@134.59.152.114:~/
 ```
 note : ( le mdps est "etuMia024NoSqlBs" ) 
 
@@ -141,14 +141,14 @@ Nettoyage
 Example : Simulation job1 MapReduce
  ![job1](/images/A23.jpeg)
 
-dans chaque ligne ( iteration ) 3 ligne sont écrits
-    -  ligne 1 pour qualquler la moyen des colonnes de chaque marque
-    -  ligne 2 pour qualquler le moyen general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2
-    -  ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA pour assurer qu'elle sera traiter au premier par le reducer 
-    - ligne 3 est notre soltion pour passer une valeur ( moyen bonusMalus) depuis le mapper vers le reducer
-    - les marque qui ont au moin une valeur BonusMalus n'auront pas la valeur moyen
+dans chaque ligne ( iteration ) 3 ligne sont écrits<br />
+    -  ligne 1 pour qualquler la moyen des colonnes de chaque marque. <br />
+    -  ligne 2 pour qualquler le moyen general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2. <br />
+    -  ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA pour assurer qu'elle sera traiter au premier par le reducer. <br />
+    - ligne 3 est notre soltion pour passer une valeur ( moyen bonusMalus) depuis le mapper vers le reducer. <br />
+    - les marque qui ont au moin une valeur BonusMalus n'auront pas la valeur moyen. <br />
 
-la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus  
+la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus. <br />
       
 resultat : 
  ![job1](/images/z22.png)
@@ -161,22 +161,22 @@ cette job est responsable de faire la jointure entre la table catalogue et la ta
  ![job1](/images/b22.jpeg)
 
 
-- Une jointure sera effectuer avec l'id marque 
-- les marque qui n'existe pas dans  la table CO2_moyennnes auront le moyenne de toute la table (id = forall)
+- Une jointure sera effectuer avec l'id marque.
+- les marque qui n'existe pas dans  la table CO2_moyennnes auront le moyenne de toute la table (id = forall).<br />
 
 
 
 Example : Simulation job1 MapReduce
  ![job1](/images/b23.jpeg)
 
-un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2.
+un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2. <br />
 
-lire l'entrée en prenant un tuple à la fois.
-Ensuite, tokeniser chaque mot de ce tuple et récupérer la marque voiture.
-La marque sera ma clé de la paire clé-valeur que mon mappeur générera éventuellement.
-J'ajouterai également un tag "catalogue" ou "CO2" pour indiquer que ce tuple d'entrée est de type catalogue ou CO2.
+lire l'entrée en prenant un tuple à la fois. <br />
+Ensuite, tokeniser chaque mot de ce tuple et récupérer la marque voiture. <br />
+La marque sera ma clé de la paire clé-valeur que mon mappeur générera éventuellement. <br />
+J'ajouterai également un tag "catalogue" ou "CO2" pour indiquer que ce tuple d'entrée est de type catalogue ou CO2. <br />
 
-note : pour la moyenne general de la table CO2 la clé est "AAAA" pour quelle sera traité en premier, on servira pour les marques qui n'existe pas dans la table CO2
+note : pour la moyenne general de la table CO2 la clé est "AAAA" pour quelle sera traité en premier, on servira pour les marques qui n'existe pas dans la table CO2. <br />
 
 
 Resultat 
