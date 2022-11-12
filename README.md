@@ -105,17 +105,6 @@ Important : il faut changer le nom de fichier des resultat "/results" et "/myres
 $ hadoop fs -cat /result/*
 $ hadoop fs -cat /myres/*
 ```
-resultat du premier job mapReduce : 
-
-
-//add pic here
-
-
-
-resultat du deuxieme job mapReduce : 
-
-
-//add pic here
 
 
 
@@ -161,3 +150,35 @@ dans chaque ligne ( iteration ) 3 ligne sont écrits
 
 la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus  
       
+resultat : 
+ ![job1](/images/z22.jpeg)
+
+      
+### 2.2. deuxieme job (Automobile-2.0)
+
+cette job est responsable de faire la jointure entre la table catalogue et la table CO2_Moyennes.
+
+ ![job1](/images/B22.jpeg)
+
+
+- Une jointure sera effectuer avec l'id marque 
+- les marque qui n'existe pas dans  la table CO2_moyennnes auront le moyenne de toute la table (id = forall)
+
+
+
+Example : Simulation job1 MapReduce
+//b34
+
+un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2.
+
+lire l'entrée en prenant un tuple à la fois.
+Ensuite, tokeniser chaque mot de ce tuple et récupérer la marque voiture.
+La marque sera ma clé de la paire clé-valeur que mon mappeur générera éventuellement.
+J'ajouterai également un tag "catalogue" ou "CO2" pour indiquer que ce tuple d'entrée est de type catalogue ou CO2.
+
+note : pour la moyenne general de la table CO2 la clé est "AAAA" pour quelle sera traité en premier, on servira pour les marques qui n'existe pas dans la table CO2
+
+
+Resultat 
+ ![job1](/images/z23.jpeg)
+
