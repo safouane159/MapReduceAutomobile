@@ -9,8 +9,7 @@ Le but est d’écrire un programme map/reduce avec Hadoop ou Spark qui va perme
 Notes :<br />
 • Les modelés des voitures du fichier CO2.csv n’ont pas beaucoup des valeurs en commun par rapport à la table catalogue – on voudrait utiliser une valeur moyenne d’émission CO2 (de même pour les autres co- lonnes : "Bonus / Malus", "Cout Energie") pour la marque de voiture concerne.<br />
 • Pour les marques de voitures qui ne sont pas dans le fichier CO2.csv on voudrait insérer la moyenne d’émission CO2 (de même pour les autres colonnes) de tous les marques de véhicules qui sont présent des deux côtés.<br />
-• Pour l’import / export des données vous pouvez utiliser des connecteurs Hadoop vu dans le cours 3 ou/et découvrir l’outil Hadoop Sqoop (http://sqoop.apache.org/) qui est projet Apache simplifiant cette tâche.<br />
-• Le fichier CO2.csv se trouve avec les autres ressources disponibles.<br />
+
 
 **Cette tache est réalisé par  **<br />
 
