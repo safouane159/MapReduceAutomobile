@@ -187,9 +187,9 @@ Resultat : <br />
 
 3. Scripts (Programmes)
 
-
-- Vous trouverz les scripts utilisé dans ce repositorie.
-- Le code est commenté est bien detaillé.
-
+- Vous trouverz dans ce repositorie:
+    - Les scripts utilisé. Le code est commenté est bien detaillé.
+    - Les fichier de resultat de chaque job
+    - Les jars a executer
 
 
