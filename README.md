@@ -140,10 +140,10 @@ Nettoyage
 Example : Simulation job1 MapReduce
  ![job1](/images/A23.jpeg)
 
-- dans chaque ligne ( iteration ) 3 ligne sont écrits<br />
+- dans chaque ligne ( iteration ) 3 ligne sont écrits : <br />
     -  ligne 1 pour qualquler la moyen des colonnes de chaque marque. <br />
     -  ligne 2 pour qualquler le moyen general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2. <br />
-    -  ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA - - pour assurer qu'elle sera traiter au premier par le reducer. <br />
+    -  ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA pour assurer qu'elle sera traiter au premier par le reducer. <br />
     - ligne 3 est notre soltion pour passer une valeur ( moyen bonusMalus) depuis le mapper vers le reducer. <br />
     - les marque qui ont au moin une valeur BonusMalus n'auront pas la valeur moyen. <br />
 
@@ -168,12 +168,11 @@ cette job est responsable de faire la jointure entre la table catalogue et la ta
 Example : Simulation job1 MapReduce
  ![job1](/images/b23.jpeg)
 
-un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2. <br />
-
-lire l'entrée en prenant un tuple à la fois. <br />
-Ensuite, tokeniser chaque mot de ce tuple et récupérer la marque voiture. <br />
-La marque sera ma clé de la paire clé-valeur que mon mappeur générera éventuellement. <br />
-J'ajouterai également un tag "catalogue" ou "CO2" pour indiquer que ce tuple d'entrée est de type catalogue ou CO2. <br />
+- un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2. <br />
+- lire l'entrée en prenant un tuple à la fois. <br />
+- Ensuite, tokeniser chaque mot de ce tuple et récupérer la marque voiture. <br />
+- La marque sera ma clé de la paire clé-valeur que mon mappeur générera éventuellement. <br />
+- J'ajouterai également un tag "catalogue" ou "CO2" pour indiquer que ce tuple d'entrée est de type catalogue ou CO2. <br />
 
 note : pour la moyenne general de la table CO2 la clé est "AAAA" pour quelle sera traité en premier, on servira pour les marques qui n'existe pas dans la table CO2. <br />
 
