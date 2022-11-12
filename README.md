@@ -151,14 +151,14 @@ dans chaque ligne ( iteration ) 3 ligne sont écrits
 la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus  
       
 resultat : 
- ![job1](/images/z22.jpeg)
+ ![job1](/images/z22.png)
 
       
 ### 2.2. deuxieme job (Automobile-2.0)
 
 cette job est responsable de faire la jointure entre la table catalogue et la table CO2_Moyennes.
 
- ![job1](/images/B22.jpeg)
+ ![job1](/images/b22.jpeg)
 
 
 - Une jointure sera effectuer avec l'id marque 
@@ -167,7 +167,7 @@ cette job est responsable de faire la jointure entre la table catalogue et la ta
 
 
 Example : Simulation job1 MapReduce
-//b34
+ ![job1](/images/b23.jpeg)
 
 un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2.
 
