@@ -24,7 +24,7 @@ Notes :<br />
 
 ## 1. Prise en main ( script pour executer les jobs)
 
-### 1.1 Se connecter au server a distance avec SSH :
+### 1.1. Se connecter au server a distance avec SSH :
 
 ouvrir un nouveau terminal1 :<br />
 
@@ -34,7 +34,7 @@ $ ssh OUAZRI@134.59.152.114 -p 443
 Note : ( le mdps est "etuMia024NoSqlBs" ) 
 
 
-### 1.2 Ajouter le fichier CO2  et catalogue dans le server:
+### 1.2. Ajouter le fichier CO2  et catalogue dans le server:
 
 Ouvrir un autre terminal2 :
     
@@ -46,7 +46,7 @@ $ scp -P 443 <path-to-your-file>/catalogue.csv OUAZRI@134.59.152.114:~/
 Note : ( le mdps est "etuMia024NoSqlBs" ) 
 
 
-### 1.3 Ajouter le fichier CO2  et catalogue dans HDFS:
+### 1.3. Ajouter le fichier CO2  et catalogue dans HDFS:
 
 
 D'abord il faut crée un dossier dans hdfs 
@@ -72,7 +72,7 @@ Verifier que les fichiers exist :
 ```shell
 $ hadoop fs -ls /CO2_OUAZRI
 ```
-### 1.4 Deplacer les jar dans le server 
+### 1.4. Deplacer les jar dans le server 
 
 D'abord récuper les jars dans ce repository git 
 
@@ -88,7 +88,7 @@ $  scp -P 443 <path-to-jar>/Automobile-2.0.0.jar  OUAZRI@134.59.152.114:~/
 $  scp -P 443 <path-to-jar>/AutomobileMultupleInput-1.0-SNAPSHOT.jar OUAZRI@134.59.152.114:~/
 ```
 
-### 1.5 Executer les jars
+### 1.5. Executer les jars
 
 
 ```shell
@@ -98,7 +98,7 @@ $  scp -P 443 <path-to-jar>/AutomobileMultupleInput-1.0-SNAPSHOT.jar OUAZRI@134.
 
 Important : il faut changer le nom de fichier des resultat "/results" et "/myres" si les deux deja exist 
 
-### 1.6 Consulter les resultat
+### 1.6. Consulter les resultat
 
 ```shell
 $ hadoop fs -cat /result/*
@@ -127,7 +127,7 @@ Cette job est responsable de faire le netoiyage des valeurs du fichier C02.csv, 
 
 Nettoyage: <br />
 
-// ![Nettoyage](/images/A22.jpeg)
+ ![Nettoyage](/images/A22.jpeg)
 
 - Les numero de ligne sont supprimer.
 - Les model sont supprimer car ils ne servent plus a rien puisque ils matche pas les models dans la table catalogue.
