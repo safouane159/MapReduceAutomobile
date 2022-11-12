@@ -140,14 +140,14 @@ Nettoyage
 Example : Simulation job1 MapReduce
  ![job1](/images/A23.jpeg)
 
-dans chaque ligne ( iteration ) 3 ligne sont écrits<br />
+- dans chaque ligne ( iteration ) 3 ligne sont écrits<br />
     -  ligne 1 pour qualquler la moyen des colonnes de chaque marque. <br />
     -  ligne 2 pour qualquler le moyen general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2. <br />
-    -  ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA pour assurer qu'elle sera traiter au premier par le reducer. <br />
+    -  ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA - - pour assurer qu'elle sera traiter au premier par le reducer. <br />
     - ligne 3 est notre soltion pour passer une valeur ( moyen bonusMalus) depuis le mapper vers le reducer. <br />
     - les marque qui ont au moin une valeur BonusMalus n'auront pas la valeur moyen. <br />
 
-la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus. <br />
+- la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus. <br />
       
 resultat : 
  ![job1](/images/z22.png)
