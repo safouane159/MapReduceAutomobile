@@ -24,29 +24,29 @@ Notes :<br />
 
 ## 1. Prise en main ( script pour executer les jobs)
 
-### 1.1 se connecter au server a distance avec SSH :
+### 1.1 Se connecter au server a distance avec SSH :
 
 ouvrir un nouveau terminal1 :<br />
 
 ```shell
 $ ssh OUAZRI@134.59.152.114 -p 443
 ```
-note : ( le mdps est "etuMia024NoSqlBs" ) 
+Note : ( le mdps est "etuMia024NoSqlBs" ) 
 
 
-### 1.2 ajouter le fichier CO2  et catalogue dans le server:
+### 1.2 Ajouter le fichier CO2  et catalogue dans le server:
 
-ouvrir un autre terminal2 :
+Ouvrir un autre terminal2 :
     
 ```shell
 $ scp -P 443 <path-to-your-file>/CO2.csv OUAZRI@134.59.152.114:~/
 
 $ scp -P 443 <path-to-your-file>/catalogue.csv OUAZRI@134.59.152.114:~/
 ```
-note : ( le mdps est "etuMia024NoSqlBs" ) 
+Note : ( le mdps est "etuMia024NoSqlBs" ) 
 
 
-### 1.3 ajouter le fichier CO2  et catalogue dans HDFS:
+### 1.3 Ajouter le fichier CO2  et catalogue dans HDFS:
 
 
 D'abord il faut crée un dossier dans hdfs 
@@ -54,13 +54,13 @@ D'abord il faut crée un dossier dans hdfs
 ```shell
 $ hdfs dfs -mkdir /CO2_OUAZRI
 ```
-verifier que le dossier exist 
+Verifier que le dossier exist 
 
 ```shell
 $ hadoop fs -ls /CO2_OUAZRI
 ```
 
-aprés on ajoute le fichier CO2 et catalogue dans hdfs  
+Aprés on ajoute le fichier CO2 et catalogue dans hdfs  
 
 ```shell
 $ hadoop fs -put CO2.csv /CO2_OUAZRI
@@ -74,14 +74,14 @@ $ hadoop fs -ls /CO2_OUAZRI
 ```
 ### 1.4 Deplacer les jar dans le server 
 
-d'abord récuper les jars dans ce repository git 
+D'abord récuper les jars dans ce repository git 
 
 
 ```shell
 $ git clone https://github.com/safouane159/MapReduceAutomobile.git
 ```
 
-aprés deplacer les jar dans Hadoop 
+Aprés deplacer les jar dans Hadoop 
 
 ```shell
 $  scp -P 443 <path-to-jar>/Automobile-2.0.0.jar  OUAZRI@134.59.152.114:~/
@@ -109,31 +109,31 @@ $ hadoop fs -cat /myres/*
 
 ## 2. Explication des script utilisé
 
-dans cette section nous allons décrir notre démarche effectué pour l’adaptation du fichier CO2.csv et son intégration dans la table catalogue.
+Dans cette section nous allons décrir notre démarche effectué pour l’adaptation du fichier CO2.csv et son intégration dans la table catalogue.
 
 
-comme vous avez consaté nous avons executer deux job Map/Reduce pour arriver au resultat attendu.
+Comme vous avez consaté nous avons executer deux job Map/Reduce pour arriver au resultat attendu.
 
-  - Automobile-2.0. (Data Munging)
-  - AutomobileMultupleInput-2.0. (joining two data set)
+  - Automobile-2.0. (Data Munging).
+  - AutomobileMultupleInput-2.0. (joining two data set).
 
-nous allons detailler chaqu'unz des deux dans ce chaptire
-
-
-### 2.1. premiere job (Automobile-2.0)
-
-cette job est responsable de faire le netoiyage des valeurs du fichier C02.csv, remplir les données manquane,calculer le moyen general 
+Nous allons detailler chaqu'unz des deux dans ce chaptire
 
 
-Nettoyage
+### 2.1. Premiere job (Automobile-2.0)
+
+Cette job est responsable de faire le netoiyage des valeurs du fichier C02.csv, remplir les données manquane,calculer le moyen general. <br /> 
+
+
+Nettoyage: <br />
 
 // ![Nettoyage](/images/A22.jpeg)
 
-- les numero de ligne sont supprimer 
-- les model sont supprimer car ils ne servent plus a rien puisque ils matche pas les models dans la table catalogue 
-- les marque repsentra le KEY pour notre MAP 
-- les BonusMalus, rejets CO2 et le cout repsentra le VALUE pour notre MAP
-- a ce stage es valeur manquant du colonne BonusMalus seront replacer par 0 mais just temporairement (on expliquera plus tard dans le rapport les changement effectuer)
+- Les numero de ligne sont supprimer.
+- Les model sont supprimer car ils ne servent plus a rien puisque ils matche pas les models dans la table catalogue.
+- Les marque repsentra le KEY pour notre MAP.
+- Les BonusMalus, rejets CO2 et le cout repsentra le VALUE pour notre MAP.
+- A ce stage es valeur manquant du colonne BonusMalus seront replacer par 0 mais just temporairement (on expliquera plus tard dans le rapport les changement effectuer).<br />
 
 
 
@@ -141,29 +141,29 @@ Example : Simulation job1 MapReduce <br />
 
  ![job1](/images/A23.jpeg)
 
-- dans chaque ligne ( iteration ) 3 ligne sont écrits : <br />
-    -  ligne 1 pour qualquler la moyen des colonnes de chaque marque. <br />
-    -  ligne 2 pour qualquler le moyen general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2. <br />
-    -  ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA pour assurer qu'elle sera traiter au premier par le reducer. <br />
-    - ligne 3 est notre soltion pour passer une valeur ( moyen bonusMalus) depuis le mapper vers le reducer. <br />
-    - les marque qui ont au moin une valeur BonusMalus n'auront pas la valeur moyen. <br />
+- Dans chaque ligne ( iteration ) 3 ligne sont écrits : <br />
+    -  Ligne 1 pour qualquler la moyen des colonnes de chaque marque. <br />
+    -  Ligne 2 pour qualquler le moyen general de tout la table qui sera affecter pour les marques qui sont disponible dans catalaogue mais pas disponible dans le fichier CO2. <br />
+    -  Ligne 3 pour qualquler le moyen des BonusMalus qui sera affecter au marque qui on aucune valeur : cette ligne est special, elle a comme key AAAA pour assurer qu'elle sera traiter au premier par le reducer. <br />
+    - Ligne 3 est notre soltion pour passer une valeur ( moyen bonusMalus) depuis le mapper vers le reducer. <br />
+    - Les marque qui ont au moin une valeur BonusMalus n'auront pas la valeur moyen. <br />
 
-- la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus. <br />
+- La valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus. <br />
       
-resultat : <br />
+Resultat : <br />
 
  ![job1](/images/z22.png)
 
       
-### 2.2. deuxieme job (Automobile-2.0)
+### 2.2. Deuxieme job (Automobile-2.0)
 
-cette job est responsable de faire la jointure entre la table catalogue et la table CO2_Moyennes.<br />
+Cette job est responsable de faire la jointure entre la table catalogue et la table CO2_Moyennes.<br />
 
  ![job1](/images/b22.jpeg)
 
 
 - Une jointure sera effectuer avec l'id marque.
-- les marque qui n'existe pas dans  la table CO2_moyennnes auront le moyenne de toute la table (id = forall).<br />
+- Les marque qui n'existe pas dans  la table CO2_moyennnes auront le moyenne de toute la table (id = forall).<br />
 
 
 
@@ -171,13 +171,13 @@ Example : Simulation job1 MapReduce <br />
 
  ![job1](/images/b23.jpeg)
 
-- un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2. <br />
-- lire l'entrée en prenant un tuple à la fois. <br />
+- Un mappeur séparé pour chacun des deux ensembles de données, c'est-à-dire un mappeur pour l'entrée Catalogue et l'autre pour l'entrée moyennes_CO2. <br />
+- Lire l'entrée en prenant un tuple à la fois. <br />
 - Ensuite, tokeniser chaque mot de ce tuple et récupérer la marque voiture. <br />
 - La marque sera ma clé de la paire clé-valeur que mon mappeur générera éventuellement. <br />
 - J'ajouterai également un tag "catalogue" ou "CO2" pour indiquer que ce tuple d'entrée est de type catalogue ou CO2. <br />
 
-note : pour la moyenne general de la table CO2 la clé est "AAAA" pour quelle sera traité en premier, on servira pour les marques qui n'existe pas dans la table CO2. <br />
+Note : pour la moyenne general de la table CO2 la clé est "AAAA" pour quelle sera traité en premier, on servira pour les marques qui n'existe pas dans la table CO2. <br />
 
 
 Resultat : <br />
