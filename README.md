@@ -149,7 +149,7 @@ Example : Simulation job1 MapReduce
 
 - la valeur la plus grande dans l'ensemble de valeur "AAAA" correspends au moyen de BonusMalus. <br />
       
-resultat : 
+resultat : <br />
  ![job1](/images/z22.png)
 
       
@@ -177,6 +177,7 @@ Example : Simulation job1 MapReduce
 note : pour la moyenne general de la table CO2 la clé est "AAAA" pour quelle sera traité en premier, on servira pour les marques qui n'existe pas dans la table CO2. <br />
 
 
-Resultat 
+Resultat : <br />
+
  ![job1](/images/z23.jpeg)
 
