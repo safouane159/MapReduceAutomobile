@@ -15,10 +15,10 @@ Notes :<br />
 
 | **Nom / mail**                               |  **Groupe**        |
 |----------------------------------------------|----------------------------|
-| SAMIA Oussama / oussamasamia1@gmail.com      | Gr8                        |
-| OUAZRI Safouane / safouane1ouazri@gmail.com  | Gr8                        |
-| KHALIFA HASSEN / $$$$$$$@gmail.com           | Gr8                        |
-| MESSAI Raoua / $$$$$$$$$$$$$$$$$$@gmail.com  | Gr8                        |
+| SAMIA Oussama / oussamasamia1@gmail.com      | Gr7                        |
+| OUAZRI Safouane / safouane1ouazri@gmail.com  | Gr7                        |
+| KHALIFA HASSEN / $$$$$$$@gmail.com           | Gr7                        |
+| MESSAI Raoua / $$$$$$$$$$$$$$$$$$@gmail.com  | Gr7.                       |
 
 
 
