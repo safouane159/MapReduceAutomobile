@@ -28,33 +28,47 @@ Notes :<br />
 
 Ouvrir un nouveau terminal1 :<br />
 
+
+- Start VM : 
+
 ```shell
-$ ssh OUAZRI@134.59.152.114 -p 443
+$ cd vagrant-projects/OracleDatabase/21.3.0
+$ sudo vagrant up
 ```
-Note : ( le mdps est "etuMia024NoSqlBs" ) 
+
+- Connect VM via SSH :<br />
+
+```shell
+$ vagrant plugin install vagrant-scp (only if the plugin is not installed) 
+$ sudo vagrant ssh
+```
 
 
-### 1.2. Ajouter le fichier CO2  et catalogue dans le server:
+- start Hadoop :<br />
 
-Ouvrir un autre terminal2 :
+```shell
+$ start-dfs.sh
+```
+### 1.2. Ajouter le fichier CO2  et catalogue dans le server:<br />
+
+Ouvrir un autre terminal2 :<br />
     
 ```shell
-$ scp -P 443 <path-to-your-file>/CO2.csv OUAZRI@134.59.152.114:~/
-
-$ scp -P 443 <path-to-your-file>/catalogue.csv OUAZRI@134.59.152.114:~/
+$ sudo vagrant scp <path-to-csv>/CO2.csv oracle-21c-vagrant:/home/vagrant/gr8
+$ sudo vagrant scp <path-to-csv>/catalogue.csv oracle-21c-vagrant:/home/vagrant/gr8
 ```
-Note : ( le mdps est "etuMia024NoSqlBs" ) 
 
 
-### 1.3. Ajouter le fichier CO2  et catalogue dans HDFS:
+
+### 1.3. Ajouter le fichier CO2  et catalogue dans HDFS: <br />
 
 
-D'abord il faut crée un dossier dans hdfs 
+D'abord il faut crée un dossier dans hdfs <br />
 
 ```shell
 $ hdfs dfs -mkdir /CO2_OUAZRI
 ```
-Verifier que le dossier exist 
+Verifier que le dossier exist <br />
 
 ```shell
 $ hadoop fs -ls /CO2_OUAZRI
@@ -67,42 +81,45 @@ $ hadoop fs -put CO2.csv /CO2_OUAZRI
 $ hadoop fs -put catalogue.csv /CO2_OUAZRI
 ```
 
-Verifier que les fichiers exist : 
+Verifier que les fichiers exist : <br />
 
 ```shell
 $ hadoop fs -ls /CO2_OUAZRI
 ```
-### 1.4. Deplacer les jar dans le server 
+### 1.4. Deplacer les jar dans le server <br />
 
-D'abord récuper les jars dans ce repository git 
+D'abord récuper les jars dans ce repository git <br />
 
 
 ```shell
 $ git clone https://github.com/safouane159/MapReduceAutomobile.git
 ```
 
-Aprés deplacer les jar dans Hadoop 
+Aprés deplacer les jar dans Hadoop <br />
 
 ```shell
-$  scp -P 443 <path-to-jar>/Automobile-2.0.0.jar  OUAZRI@134.59.152.114:~/
-$  scp -P 443 <path-to-jar>/AutomobileMultupleInput-2.0.0.jar OUAZRI@134.59.152.114:~/
+$ sudo vagrant scp <path-to-jar>/Automobile-2.0.0.jar oracle-21c-vagrant:/home/vagrant/gr8
+$ sudo vagrant scp.<path-to-jar>/AutomobileMultupleInput-2.0.0.jar oracle-21c-vagrant:/home/vagrant/gr8
+
 ```
 
-### 1.5. Executer les jars
+### 1.5. Executer les jars <br />
 
 
 ```shell
- $ hadoop jar Automobile-2.0.0.jar  org.example.Automobile /CO2_OUAZRI/CO2.csv /result8
- $ hadoop jar AutomobileMultupleInput-2.0.0.jar  org.mbds.AutomobileMultiple /CO2_OUAZRI/catalogue.csv  /result8/part-r-00000 /myres12
+ $ cd /home/vagrant/gr8
+ $ hadoop jar Automobile-2.0.0.jar  org.example.Automobile CO2_OUAZRI/CO2.csv /result
+
+ $ hadoop jar AutomobileMultupleInput-2.0.0.jar  org.mbds.AutomobileMultiple CO2_OUAZRI/catalogue.csv  /result/part-r-00000 /myres
 ```
 
-Important : il faut changer le nom de fichier des resultat "/results8" et "/myres" si les deux déja exist 
+Important : il faut changer le nom de fichier des resultat "/result" et "/myres" si les deux déja exist 
 
 ### 1.6. Consulter les resultats
 
 ```shell
-$ hadoop fs -cat /result8/*
-$ hadoop fs -cat /myres12/*
+ $ hadoop fs -cat /result/*
+ $ hadoop fs -cat /myres/*
 ```
 
 
