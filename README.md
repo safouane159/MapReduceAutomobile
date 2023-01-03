@@ -24,7 +24,7 @@ Notes :<br />
 
 ## 1. Prise en main (script pour executer les jobs)
 
-### 1.1. Se connecter au server a distance avec SSH :
+### 1.1. Se connecter à la machine virtuel avec SSH :
 
 Ouvrir un nouveau terminal1 :<br />
 
